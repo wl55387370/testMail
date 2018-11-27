@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Properties;
 
 public class SendMail {
-	private String content = "";
+	
 	//配置邮件参数
 	//发件人的邮件和密码
 	//PS:某些邮件服务器为了增加邮箱本身密码的安全性，给SMTP客服端设置了独立密码（有的邮箱称为“授权码”）
@@ -29,7 +29,7 @@ public class SendMail {
 	public String user = "Antoyam";
 	//抄送人
 	public String copyMailAccount = "";
-	public String title = "自动化测试邮件来自Antoy自动化测试框架!";	
+	public String title = "邮件来自Antoy测试邮件!";	
 	
 	/**
 	 * 创建一封只包含文本的简单邮件
@@ -41,7 +41,7 @@ public class SendMail {
 	 * @throws Exceptio
 	 */
 	
-	public  MimeMessage createMimeMessage(Session session,String sendMail,String receiveMail) throws UnsupportedEncodingException, MessagingException 
+	public  MimeMessage createMimeMessage(Session session,String sendMail,String receiveMail,String content) throws UnsupportedEncodingException, MessagingException 
 	{ MimeMessage message = new MimeMessage(session);
 	// 2. From: 发件人（昵称有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改昵称）
     message.setFrom(new InternetAddress(sendMail, user, "UTF-8"));
@@ -98,7 +98,7 @@ public class SendMail {
 	        session.setDebug(true);                                 // 设置为debug模式, 可以查看详细的发送 log
 
 	        // 3. 创建一封邮件
-	        MimeMessage message = createMimeMessage(session, myEmailAccount, receiveMailAccount);
+	        MimeMessage message = createMimeMessage(session, myEmailAccount, receiveMailAccount,content);
 
 	        // 4. 根据 Session 获取邮件传输对象
 	        Transport transport = session.getTransport();
